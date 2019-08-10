@@ -1,11 +1,18 @@
 <template>
-  <div id="test">{{text}}</div>
+  <div id="test">
+    {{text}}
+    <ConcurrentRequest></ConcurrentRequest>
+  </div>
 </template>
 
 //控制显示内容如何变化
 <script>
   import axios from "axios";
+  import ConcurrentRequest from "./concurrent-request.vue"
   export default {
+    components: {
+      ConcurrentRequest,
+    },
     data() {
       return {
         text: 'abc'
@@ -16,11 +23,9 @@
       // HTTP://localhost:8080/data.json?id=12
       axios.get('../public/test.json', {
         params: {id: 12}
-      })
-        .then(function (response) {
+      }).then(function (response) {
           console.log(response);
-        })
-        .catch(function (error) {
+        }).catch(function (error) {
           console.log(error);
         });
         //get请求的另一种写法
@@ -53,6 +58,19 @@
         axios.put('/put', data).then((res) => console.log(res));
         //patch 请求
         axios.patch('/patch', data).then((res) => console.log(res));
+        //delete 请求
+        //参数放在URL上
+        axios.delete('/del', {
+          params: {id:12}
+        }).then(res=> {
+          console.log(res);
+        });
+        //参数放在请求体的Request Payload上
+        axios.delete('/del', {
+          data: {id:12}
+        }).then(res=> {
+          console.log(res);
+        });
     }
   }
 </script>

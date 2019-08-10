@@ -21,8 +21,23 @@
 
 ## Axios请求方法及别名（get方法）
 > * `get` 获取数据
-> * `post`  提交数据（`form-data`表单提交: 图片+文件上传； `application/json`）
+> * `post`  提交数据
+
+数据格式1: `form-data`表单提交: 图片+文件上传； 
+
+数据格式2: `application/json`
+
 `Request Headers` 中 `Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryO24RQrpc59b2ZIe3` boundary 相当于把传输的数据编码了
 > * `put`  更新数据（所有数据 推送到后端）
 > * `patch` 更新数据（只将修改的数据推送到后端）
 > * `delete` 删除数据
+
+## 并发请求
+同时进行多个请求，并统一处理返回值
+> * `axios.all()` 参数是多个axio请求组成的数组
+> * `axios.spread()` 对多个请求完成后的返回数据进行分割处理,参数是回调函数,回调函数的参数对应多个请求的返回值
+
+## 创建axios实例
+后端接口有多个地址，超时时长不同。可以在实例中配置这些参数，用实例去请求。
+`超时时长` 发起HTTP请求时，如果服务端长时间没有返回数据，接口就会报超时。一般由后端进行定义。
+>* 
