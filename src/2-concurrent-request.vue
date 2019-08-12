@@ -6,7 +6,7 @@
   import axios from "axios";
 
   export default {
-    name: 'axios2 并发请求',
+    name: 'axios2并发请求',
     created: function() {
       axios.all([
         axios.get('../public/test.json'),

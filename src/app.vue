@@ -2,16 +2,19 @@
   <div id="test">
     {{text}}
     <ConcurrentRequest></ConcurrentRequest>
+    <AxiosExample></AxiosExample>
   </div>
 </template>
 
 //控制显示内容如何变化
 <script>
   import axios from "axios";
-  import ConcurrentRequest from "./concurrent-request.vue"
+  import ConcurrentRequest from "./2-concurrent-request.vue"
+  import AxiosExample from "./3-axios-example.vue"
   export default {
     components: {
       ConcurrentRequest,
+      AxiosExample
     },
     data() {
       return {

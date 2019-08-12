@@ -40,4 +40,28 @@
 ## 创建axios实例
 后端接口有多个地址，超时时长不同。可以在实例中配置这些参数，用实例去请求。
 `超时时长` 发起HTTP请求时，如果服务端长时间没有返回数据，接口就会报超时。一般由后端进行定义。
->* 
+>* 1. axios全局配置
+```js
+//1.全局配置
+axios.defaults.timeout = 1000;
+```
+>* 2. axios实例配置
+```js
+//2.实例配置
+let instance = axios.create();
+instance.defaults.timeout = 3000;
+```
+>* 3. axios请求配置
+```js
+let instance = axios.create({
+    baseURL: 'http://localhost:8080'
+});
+//3.axios请求配置
+instance.get('/public/test.json', {
+timeout: 5000
+}).then(res => {
+    console.log(res);
+});
+```
+`优先级`:  `全局配置`<`实例配置`<`请求配置`
+
