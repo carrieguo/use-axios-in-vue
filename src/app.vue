@@ -1,8 +1,9 @@
 <template>
-  <div id="test">
+  <div id="app">
     {{text}}
     <ConcurrentRequest></ConcurrentRequest>
     <AxiosExample></AxiosExample>
+    <router-view/>
   </div>
 </template>
 
