@@ -3,6 +3,8 @@
     {{text}}
     <ConcurrentRequest></ConcurrentRequest>
     <AxiosExample></AxiosExample>
+    <router-link to="/foo">Go to Foo</router-link>
+    <router-link to="/user/bar">Go to Bar</router-link>
     <router-view/>
   </div>
 </template>
@@ -76,6 +78,19 @@
         }).then(res=> {
           console.log(res);
         });
+    },
+    computed: {
+      username () {
+        // 我们很快就会看到 `params` 是什么
+        return this.$route.params.username
+      }
+    },
+    methods: {
+      goBack () {
+        window.history.length > 1
+          ? this.$router.go(-1)
+          : this.$router.push('/')
+      }
     }
   }
 </script>

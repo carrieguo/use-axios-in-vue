@@ -1,4 +1,5 @@
 <template>
+  <div>axios3</div>
 </template>
 
 //创建axios实例

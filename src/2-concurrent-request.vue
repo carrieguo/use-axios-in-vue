@@ -1,4 +1,5 @@
 <template>
+  <div>axios2</div>
 </template>
 
 //并发请求

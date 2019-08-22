@@ -10,6 +10,9 @@ Vue.use(VueRouter);
 // 可以从其他文件 import 进来
 import ConcurrentRequest from "./src/2-concurrent-request.vue";
 import AxiosExample from "./src/3-axios-example.vue";
+const User = {
+  template: '<div>User {{ $route.params.id }}</div>'
+}
 
 // 2. 定义路由
 // 每个路由应该映射一个组件。 其中"component" 可以是
@@ -18,12 +21,14 @@ import AxiosExample from "./src/3-axios-example.vue";
 // 我们晚点再讨论嵌套路由。
 const routes = [
   { path: '/foo', name: 'foo', component: ConcurrentRequest },
-  { path: '/bar', name: 'axios实例', component: AxiosExample }
+  { path: '/bar', name: 'axios实例', component: AxiosExample },
+  { path: '/user/:id', component: AxiosExample }
 ];
 
 // 3. 创建 router 实例，然后传 `routes` 配置
 // 你还可以传别的配置参数, 不过先这么简单着吧。
 const router = new VueRouter({
+  mode: 'history',
   routes: routes // (缩写) 相当于 routes: routes
 });
 
