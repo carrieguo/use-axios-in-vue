@@ -1,11 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
 
 
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: './index.js',
   mode: 'development',
+  devServer: {
+    contentBase: './dist'
+  },
   module: {
     rules: [
       {

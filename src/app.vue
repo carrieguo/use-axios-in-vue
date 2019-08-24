@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     {{text}}
-    <ConcurrentRequest></ConcurrentRequest>
-    <AxiosExample></AxiosExample>
-    <router-link to="/foo">Go to Foo</router-link>
-    <router-link to="/user/bar">Go to Bar</router-link>
+    <van-button type="default">默认按钮</van-button>
+    <router-link to="/ConcurrentRequest">Go to  第二章</router-link>
+    <router-link to="/AxiosExample">Go to 第三章</router-link>
+    <router-link to="/Project">Go to project</router-link>
     <router-view/>
   </div>
 </template>
@@ -14,11 +14,18 @@
   import axios from "axios";
   import ConcurrentRequest from "./2-concurrent-request.vue";
   import AxiosExample from "./3-axios-example.vue";
+  import Project from "./4-project.vue";
+  import Vue from 'vue';
+  import { Button } from 'vant';
+
+  Vue.use(Button);
 
   export default {
     components: {
       ConcurrentRequest,
-      AxiosExample
+      AxiosExample,
+      Project,
+      [Button.name]: Button
     },
     data() {
       return {
