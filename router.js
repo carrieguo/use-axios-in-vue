@@ -9,6 +9,7 @@ Vue.use(VueRouter);
 // 可以从其他文件 import 进来
 import ConcurrentRequest from "./src/2-concurrent-request.vue";
 import AxiosExample from "./src/3-axios-example.vue";
+import Project from "./src/4-project.vue"
 const User = {
   template: `
     <div class="user">
@@ -26,6 +27,7 @@ const User = {
 const routes = [
   { path: '/ConcurrentRequest', name: 'ConcurrentRequest', component: ConcurrentRequest },
   { path: '/AxiosExample', name: 'axios实例', component: AxiosExample },
+  { path: '/Project', name: 'vantButton', component: Project },
   { path: '/user/:id', component: User,
       children: [
         {

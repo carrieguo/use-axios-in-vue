@@ -1,7 +1,7 @@
 <template>
   <div>
       <h1>vant button</h1>
-      
+      <van-button type="warning">警告按钮</van-button>
   </div>
 </template>
 

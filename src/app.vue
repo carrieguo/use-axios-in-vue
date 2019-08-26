@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     {{text}}
-    <van-button type="default">默认按钮</van-button>
     <router-link to="/ConcurrentRequest">Go to  第二章</router-link>
     <router-link to="/AxiosExample">Go to 第三章</router-link>
     <router-link to="/Project">Go to project</router-link>
@@ -12,20 +11,16 @@
 //控制显示内容如何变化
 <script>
   import axios from "axios";
-  import ConcurrentRequest from "./2-concurrent-request.vue";
-  import AxiosExample from "./3-axios-example.vue";
-  import Project from "./4-project.vue";
-  import Vue from 'vue';
-  import { Button } from 'vant';
+  // import ConcurrentRequest from "./2-concurrent-request.vue";
+  // import AxiosExample from "./3-axios-example.vue";
+  // //import Project from "./4-project.vue";
 
-  Vue.use(Button);
 
   export default {
     components: {
-      ConcurrentRequest,
-      AxiosExample,
-      Project,
-      [Button.name]: Button
+      // ConcurrentRequest,
+      // AxiosExample,
+      // //Project
     },
     data() {
       return {
