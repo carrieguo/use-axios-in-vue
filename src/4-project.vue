@@ -1,24 +1,53 @@
 <template>
   <div>
-      <h1>vant button</h1>
-      <van-button type="warning">警告按钮</van-button>
+    <!-- 联系人列表 -->
+    <van-contact-list
+      v-model="chosenContactId"
+      :list="list"
+    />
   </div>
 </template>
 
 //并发请求
 <script>
-  import axios from "axios";
-  import Vue from 'vue';
-  import { Button } from 'vant';
+import axios from "axios";
+import Vue from "vue";
+import { ContactList } from "vant";
 
-  Vue.use(Button);
+Vue.use(ContactList);
 
-  export default {
-    name: 'vantButton',
-    components: {
-        [Button.name]: Button
+export default {
+  name: "contactList",
+  components: {
+    [ContactList.name]: ContactList
+  },
+  created: function() {
+    let instance = axios.create({
+      baseURL: "http://localhost:9000/api",
+      timeout: 1000,
+      method: [],
+      params: {}, //请求参数拼接在url上
+      data: {} //请求参数放在请求体
+    });
+    instance
+      .get("/contactList", {
+        timeout: 5000
+      })
+      .then(res => {
+        this.list = res.data.data;
+      });
+  },
+  data() {
+    return {
+      chosenContactId: null,
+      editingContact: {},
+      showList: false,
+      showEdit: false,
+      isEdit: false,
+      list: this.list
     }
   }
+}
 </script>
 
 <style>
