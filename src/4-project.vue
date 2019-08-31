@@ -17,6 +17,15 @@
         @select="onSelect"
       />
     </van-popup>
+    <!-- 联系人编辑 -->
+    <van-popup v-model="showEdit" position="bottom">
+      <van-contact-edit
+        :contact-info="editingContact"
+        :is-edit="isEdit"
+        @save="onSave"
+        @delete="onDelete"
+      />
+    </van-popup>
   </div>
 </template>
 
@@ -24,28 +33,31 @@
 <script>
 import axios from "axios";
 import Vue from "vue";
-import { Popup, ContactCard, ContactList } from "vant";
+import { Popup, ContactCard, ContactList, ContactEdit, Toast } from "vant";
 
 Vue
   .use(ContactCard)
-  .use(ContactList);
+  .use(ContactList)
+  .use(ContactEdit);
 
 export default {
   name: "contactList",
   components: {
     [Popup.name]: Popup,
+    [Toast.name]: Toast,
     [ContactCard.name]: ContactCard,
-    [ContactList.name]: ContactList
+    [ContactList.name]: ContactList,
+    [ContactEdit.name]: ContactEdit
   },
   created: function() {
-    let instance = axios.create({
+    this.instance = axios.create({
       baseURL: "http://localhost:9000/api",
       timeout: 1000,
       method: [],
       params: {}, //请求参数拼接在url上
       data: {} //请求参数放在请求体
     });
-    instance
+    this.instance
       .get("/contactList", {
         timeout: 5000
       })
@@ -100,8 +112,18 @@ export default {
       
       if (this.isEdit) {
         this.list = this.list.map(item => item.id === info.id ? info : item);
+        this.instance
+          .put('contact/edit', info)
+          .then(res => {
+            Toast('保存成功');
+          });
       } else {
         this.list.push(info);
+        this.instance
+          .post('/contact/new/json', info)
+          .then(res => {
+            Toast('添加成功');
+          });
       }
       this.chosenContactId = info.id;
     },
@@ -113,6 +135,11 @@ export default {
       if (this.chosenContactId === info.id) {
         this.chosenContactId = null;
       }
+      this.instance
+      .delete('/contact?id=' + info.id)
+      .then(res => {
+        Toast('删除成功');
+      });
     }
   }
 }
