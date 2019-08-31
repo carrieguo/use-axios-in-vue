@@ -35,8 +35,7 @@ import axios from "axios";
 import Vue from "vue";
 import { Popup, ContactCard, ContactList, ContactEdit, Toast } from "vant";
 
-Vue
-  .use(ContactCard)
+Vue.use(ContactCard)
   .use(ContactList)
   .use(ContactEdit);
 
@@ -50,20 +49,7 @@ export default {
     [ContactEdit.name]: ContactEdit
   },
   created: function() {
-    this.instance = axios.create({
-      baseURL: "http://localhost:9000/api",
-      timeout: 1000,
-      method: [],
-      params: {}, //请求参数拼接在url上
-      data: {} //请求参数放在请求体
-    });
-    this.instance
-      .get("/contactList", {
-        timeout: 5000
-      })
-      .then(res => {
-        this.list = res.data.data;
-      });
+    this.getContactList();
   },
   data() {
     return {
@@ -73,11 +59,11 @@ export default {
       showEdit: false,
       isEdit: false,
       list: this.list
-    }
+    };
   },
   computed: {
     cardType() {
-      return this.chosenContactId !== null ? 'edit' : 'add';
+      return this.chosenContactId !== null ? "edit" : "add";
     },
 
     currentContact() {
@@ -86,6 +72,10 @@ export default {
     }
   },
   methods: {
+    async getContactList() {
+      let res = await this.$Http.getContactList();
+      this.list = res.data;
+    },
     // 添加联系人
     onAdd() {
       this.editingContact = { id: this.list.length };
@@ -95,7 +85,7 @@ export default {
 
     // 编辑联系人
     onEdit(item) {
-      this.isEdit = true;      
+      this.isEdit = true;
       this.showEdit = true;
       this.editingContact = item;
     },
@@ -106,43 +96,40 @@ export default {
     },
 
     // 保存联系人
-    onSave(info) {
+    async onSave(info) {
       this.showEdit = false;
       this.showList = false;
-      
+
       if (this.isEdit) {
-        this.list = this.list.map(item => item.id === info.id ? info : item);
-        this.instance
-          .put('contact/edit', info)
-          .then(res => {
-            Toast('保存成功');
-          });
+        this.list = this.list.map(item => (item.id === info.id ? info : item));
+        let res = await this.$Http.editContact(info);
+        if (res.code === "200") {
+          Toast("保存成功");
+        }
       } else {
         this.list.push(info);
-        this.instance
-          .post('/contact/new/json', info)
-          .then(res => {
-            Toast('添加成功');
-          });
+        let res = await this.$Http.newContactJson(info);
+        if (res.code === "200") {
+          Toast("添加成功");
+        }
       }
       this.chosenContactId = info.id;
     },
 
     // 删除联系人
-    onDelete(info) {
+    async onDelete(info) {
       this.showEdit = false;
       this.list = this.list.filter(item => item.id !== info.id);
       if (this.chosenContactId === info.id) {
         this.chosenContactId = null;
       }
-      this.instance
-      .delete('/contact?id=' + info.id)
-      .then(res => {
-        Toast('删除成功');
-      });
+      let res = await this.$Http.getContactList({ id: info.id });
+      if (res.code === "200") {
+        Toast("删除成功");
+      }
     }
   }
-}
+};
 </script>
 
 <style>
