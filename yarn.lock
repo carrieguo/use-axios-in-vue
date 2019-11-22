@@ -3940,10 +3940,10 @@ v8-compile-cache@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.0.3.tgz#00f7494d2ae2b688cfe2899df6ed2c54bef91dbe"
 
-vant@^2.1.5:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-2.1.5.tgz#cef25202faaac02083c548805cdb796dacf6a9cb"
-  integrity sha512-kkVI8dRp7csKYQGByfEhoLte54dnD2R9OBmydApRJTcXoSi9LpCJifhOtRXBxaNs1yQ704cncPBFhVwe4tFqmA==
+vant@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-2.1.8.tgz#38cb5ac8cf6a78805ece57d4b278584f7d13cd47"
+  integrity sha512-mF0ivFVfbErsEtTYqDt2URNXRZi6JpOwPI+0WFgjRP23cktrew6cScuaqy3pEYXfJqxLgMwk2ehzCHat67x0XA==
   dependencies:
     "@babel/runtime" "7.x"
     "@vant/icons" "1.1.13"
